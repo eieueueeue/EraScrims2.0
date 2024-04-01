@@ -1,5 +1,5 @@
 Project Impulse  
 Made Possible by venti, emp, shxnkso and Hetero Joe
 
-Hi guys!
+Hi guys! Welcome to Project Impulse
 
