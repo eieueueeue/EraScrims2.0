@@ -10,7 +10,7 @@ public class Launcher {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to the Launcher");
+        System.out.println("Welcome to Project Impulse");
         System.out.println("-----------------------");
 
         // Prompt for username and password
