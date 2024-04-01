@@ -9,7 +9,7 @@ public class Launcher {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to Project Impulse");
+        System.out.println("Welcome to Project Impulse, Enjoy The OG Scrims!");
         System.out.println("-----------------------");
 
         System.out.print("Enter username: ");
