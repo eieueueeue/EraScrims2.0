@@ -7,4 +7,4 @@ Hi guys! Welcome to Project Impulse
 
 
 
-Project Impulse Is A Chapter 1 Season 8 Emulator  
+Project Impulse Is A Chapter 1, 2 maybe 3 Fortnite Emulator!
