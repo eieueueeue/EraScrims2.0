@@ -14,4 +14,10 @@ Project Impulse Is A Chapter 1, 2 Fortnite Emulator
 
 
 
+Project Impulse Will Be Hosting Soon!
+
+Will we see you on the battle bus?? 
+
+
+
 
