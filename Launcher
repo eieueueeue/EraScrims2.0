@@ -7,56 +7,73 @@ public class Launcher {
     private static final String PASSWORD = "password";
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Welcome to the Launcher");
-            System.out.println("-----------------------");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Launcher");
+        System.out.println("-----------------------");
 
-            System.out.print("Enter username: ");
-            String enteredUsername = scanner.nextLine();
-            System.out.print("Enter password: ");
-            String enteredPassword = scanner.nextLine();
+        if (!login(scanner)) {
+            System.out.println("Invalid username or password. Access denied.");
+            return;
+        }
 
-            if (isValidLogin(enteredUsername, enteredPassword)) {
-                System.out.println("Login successful. Welcome, " + USERNAME + "!");
+        System.out.println("Login successful. Welcome, " + USERNAME + "!");
 
-                boolean running = true;
-                while (running) {
-                    System.out.println("\nLauncher Options:");
-                    System.out.println("1. Directory Option");
-                    System.out.println("2. Launch Application");
-                    System.out.println("3. Exit");
+        boolean running = true;
+        while (running) {
+            displayOptions();
+            int option = getIntInput(scanner);
 
-                    System.out.print("Choose an option: ");
-                    int option = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-
-                    switch (option) {
-                        case 1:
-                            listDirectoryContents(scanner);
-                            break;
-                        case 2:
-                            launchApplication();
-                            break;
-                        case 3:
-                            running = false;
-                            break;
-                        default:
-                            System.out.println("Invalid option.");
-                    }
-                }
-            } else {
-                System.out.println("Invalid username or password. Access denied.");
+            switch (option) {
+                case 1:
+                    listDirectoryContents(scanner);
+                    break;
+                case 2:
+                    launchApplication();
+                    break;
+                case 3:
+                    System.out.println("Exiting the launcher. Goodbye!");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
             }
         }
+
+        scanner.close();
+    }
+
+    private static boolean login(Scanner scanner) {
+        System.out.print("Enter username: ");
+        String enteredUsername = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String enteredPassword = scanner.nextLine();
+        return isValidLogin(enteredUsername, enteredPassword);
     }
 
     private static boolean isValidLogin(String enteredUsername, String enteredPassword) {
         return enteredUsername.equals(USERNAME) && enteredPassword.equals(PASSWORD);
     }
 
+    private static void displayOptions() {
+        System.out.println("\nLauncher Options:");
+        System.out.println("1. List Directory Contents");
+        System.out.println("2. Launch Application");
+        System.out.println("3. Exit");
+        System.out.print("Choose an option: ");
+    }
+
+    private static int getIntInput(Scanner scanner) {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            scanner.next(); // consume non-integer input
+        }
+        return scanner.nextInt();
+    }
+
     private static void listDirectoryContents(Scanner scanner) {
         System.out.print("Enter the directory path: ");
-        String directoryPath = scanner.nextLine().trim();
+        String directoryPath = scanner.next().trim();
+        scanner.nextLine(); // consume newline
 
         if (directoryPath.isEmpty()) {
             System.out.println("Directory path cannot be empty. Please enter a valid directory path.");
@@ -73,4 +90,14 @@ public class Launcher {
                 }
             } else {
                 System.out.println("No files or folders found in the directory.");
-     
+            }
+        } else {
+            System.out.println("Invalid directory path. Please enter a valid directory path.");
+        }
+    }
+
+    private static void launchApplication() {
+        // Implement application launching logic here
+        System.out.println("Launching application...");
+    }
+}
