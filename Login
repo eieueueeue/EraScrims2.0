@@ -1,1 +1,41 @@
+import static spark.Spark.*;
+
+public class DiscordAuthExample {
+
+    private static final String CLIENT_ID = "YOUR_CLIENT_ID";
+    private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET";
+    private static final String REDIRECT_URI = "http://localhost:4567/discord/callback";
+
+    public static void main(String[] args) {
+        port(4567);
+
+        // Step 1: Redirect users to Discord OAuth2 login page
+        get("/login", (req, res) -> {
+            res.redirect("https://discord.com/api/oauth2/authorize?client_id=" + CLIENT_ID + "&redirect_uri=" +
+                    REDIRECT_URI + "&response_type=code&scope=identify");
+            return null;
+        });
+
+        // Step 2: Handle OAuth2 callback from Discord
+        get("/discord/callback", (req, res) -> {
+            String code = req.queryParams("code");
+
+            // Exchange authorization code for access token
+            // In a real-world scenario, you would make a POST request to Discord's token endpoint
+            // and handle the response to extract the access token.
+            // For simplicity, we'll just print the code here.
+            System.out.println("Authorization Code: " + code);
+
+            // Once you have the access token or user ID, you can use it for authentication in your launcher
+            // You can associate the Discord user ID with a user account in your launcher's database
+
+            // Redirect the user to the home page or dashboard
+            res.redirect("/home");
+            return null;
+        });
+
+        // Example home page
+        get("/home", (req, res) -> "Welcome to the Launcher Home Page!");
+    }
+}
 
